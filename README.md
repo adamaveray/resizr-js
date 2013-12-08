@@ -5,7 +5,7 @@ _"For when media queries just aren't enough"_
 
 Trigger events when browser windows resize past certain breakpoints. Zero dependencies.
 
-[Download](https://raw.github.com/adamaveray/resizr-js/master/resizr.min.js) | [Demo](https://adamaveray.github.io/resizr-js)
+[Download](https://raw.github.com/adamaveray/resizr-js/master/resizr.min.js) | [Demo](http://adamaveray.github.io/resizr-js)
 
 -----
 
