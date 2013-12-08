@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Resizr.js</title>
+	
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div role="main">
+	<header role="banner">
+		<a class="project-name" href="/">Resizr.js</a>
+	
+		<p class="terrible-line">"For when media-queries aren't enough"</p>
+	
+		<p class="pitch">Trigger events when browser windows resize past certain breakpoints. Zero dependencies.</p>
+	
+		<section class="actions">
+			<a href="https://raw.github.com/adamaveray/resizr-js/master/resizr.min.js" class="action download">
+				<h2>Download</h2>
+				<ul class="structural details">
+					<li>v1.0</li>
+					<li><time datetime="2013-12-08">8 Dec 2013</time></li>
+				</ul>
+			</a>
+
+			<a href="https://github.com/adamaveray/resizr-js" class="action view-source">View on GitHub</a>
+		</section>
+	</header>
+
+	<p class="input-container">
+		<label for="main-input">Custom Breakpoint (px)</label>
+		<input id="main-input" type="number" />
+	</p>
+	
+	<div class="details">
+		<h2 id="usage">Usage</h2>
+
+		<h3 id="adding">Adding</h3>
+
+		<p>The global object <code>Resizr</code> will be created when the script is added. Call <code>add</code> on it to add a listener:</p>
+
+		<pre><code class="javascript">Resizr.add(500, function(isBelow){
+	// Custom logic
+});</code></pre>
+
+		<p>The first parameter provided is the breakpoint to watch, in pixels. The system matches based on &#8220;greater than or equal&#8221;, so if the window is the breakpoint&#8217;s width exactly it is considered over.</p>
+
+		<p>The callback will be passed a boolean value for the first parameter. If the value is <code>true</code>, the window was resized over the breakpoint, and if <code>false</code>, resized under.</p>
+
+		<p>When the callback is added, it will be triggered immediately (with the first parameter same as above). This first run, however, will also have <code>true</code> passed as the second parameter, indicating the callback was triggered without user input. This lets you prepare the initial state of what the callback will affect initially, then later toggle based on window resizing.</p>
+
+		<p>A very trivial example of using the second parameter:</p>
+
+		<pre><code class="javascript">var $element;
+
+Resizr.add(500, function(isBelow, isFirstRun){
+	if(isFirstRun){
+		$element	= $(&apos;&lt;div/&gt;&apos;).text(&apos;A demo&apos;);
+	}
+
+	if(isBelow){
+		$element.appendTo($someElement);
+	} else {
+		$element.appendTo($otherElement);
+	}
+});</code></pre>
+
+		<p>You can optionally pass `false` as the third parameter to prevent the first run of the callback.</p>
+
+		<h3 id="removing">Removing</h3>
+
+		<p>To remove a callback, call <code>remove</code> with the callback to remove.</p>
+
+		<pre><code class="javascript">var callback	= function(){ /* ... */ };
+Resizr.add(850, callback);
+
+// ...
+
+Resizr.remove(callback);</code></pre>
+
+		<h3 id="additionaloptions">Additional Options</h3>
+
+		<p>To prevent overwhelming some browsers the callbacks are throttled, so will have a forced delay between runthroughs. The default delay is 500ms, but this interval can be customised by setting the <code>throttle</code> value:</p>
+
+		<pre><code class="javascript">Resizr.throttle	= 1000;</code></pre>
+	</div>
+
+	<div class="console">
+		<h2 class="label">Console</h2>
+		<ul class="console-output" id="console-output"></ul>
+	</div>
+	
+	<footer role="contentinfo">
+		<p>By <a href="https://twitter.com/adamaveray">@adamaveray</a></p>
+	</footer>
+</div>
+	
+
+<script src="src/resizr.min.js"></script>
+
+<!-- jQuery is not required by Resizr, instead added for "fun effects" *triggered by Resizr*  -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="main.js"></script>
+</body>
+</html>
